@@ -21,7 +21,7 @@ exports.create = [
     .isLength({ min: 1 })
     .escape()
     .withMessage("Type n°1 must be specified."),
-    body("type2")
+  body("type2")
     .trim()
     .isLength({ min: 1 })
     .escape()
@@ -41,7 +41,8 @@ exports.create = [
     var pokemon = new Pokemon({
       _id: req.body.id,
       name: req.body.name,
-      type: req.body.type,
+      type1: req.body.type1,
+      type2: req.body.type2,
       dresseur: req.body.dresseur,
     });
     if (!errors.isEmpty()) {
@@ -132,11 +133,16 @@ exports.update = [
     .withMessage("First name must be specified.")
     .isAlphanumeric()
     .withMessage("First name has non-alphanumeric characters."),
-  body("type")
+    body("type1")
     .trim()
     .isLength({ min: 1 })
     .escape()
-    .withMessage("Last name must be specified."),
+    .withMessage("Type n°1 must be specified."),
+  body("type2")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Type n°2 must be specified."),
   body("dresseur")
     .trim()
     .isLength({ min: 1 })
@@ -151,7 +157,8 @@ exports.update = [
     var pokemon = new Pokemon({
       _id: req.params.id,
       name: req.body.name,
-      type: req.body.type,
+      type1: req.body.type1,
+      type2: req.body.type2,
       dresseur: req.body.dresseur,
     });
     if (!errors.isEmpty()) {
