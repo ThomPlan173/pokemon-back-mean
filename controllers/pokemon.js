@@ -16,11 +16,16 @@ exports.create = [
     .isLength({ min: 1 })
     .escape()
     .withMessage("First name must be specified."),
-  body("type")
+  body("type1")
     .trim()
     .isLength({ min: 1 })
     .escape()
-    .withMessage("Last name must be specified."),
+    .withMessage("Type n°1 must be specified."),
+    body("type2")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("Type n°2 must be specified."),
   body("dresseur")
     .trim()
     .isLength({ min: 1 })
@@ -54,13 +59,13 @@ exports.create = [
 // Read
 exports.getAll = function (req, res, next) {
   Pokemon.find()
-  .populate("dresseur")
-  .exec(function (err, result) {
-    if (err) {
-      return res.status(500).json(err);
-    }
-    return res.status(200).json(result);
-  });
+    .populate("dresseur")
+    .exec(function (err, result) {
+      if (err) {
+        return res.status(500).json(err);
+      }
+      return res.status(200).json(result);
+    });
 };
 exports.getById = [
   param("id")
@@ -77,13 +82,13 @@ exports.getById = [
       return res.status(400).json({ errors: errors.array() });
     } else {
       Pokemon.findById(req.params.id)
-      .populate("dresseur")
-      .exec(function (err, result) {
-        if (err) {
-          return res.status(500).json(err);
-        }
-        return res.status(200).json(result);
-      });
+        .populate("dresseur")
+        .exec(function (err, result) {
+          if (err) {
+            return res.status(500).json(err);
+          }
+          return res.status(200).json(result);
+        });
     }
   },
 ];
