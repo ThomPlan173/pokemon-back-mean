@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors = require('cors');
 var dresseurRouter = require('./routes/dresseur');
 var pokemonRouter = require('./routes/pokemon');
 
@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/dresseur', dresseurRouter);
+app.use(cors);
+app.use('/dresseurs', dresseurRouter);
 app.use('/pokemon', pokemonRouter);
 module.exports = app;
